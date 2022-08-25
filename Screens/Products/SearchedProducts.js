@@ -78,16 +78,13 @@ const SearchedProduct = (props) => {
                     color="coolGray.800"
                     alignSelf="flex-start"
                   >
-                    {item.timeStamp}
+                    {item.price}
                   </Text>
                 </HStack>
               </TouchableOpacity>
             </Box>
           )}
           keyExtractor={(item) => item._id.$oid}
-          // onPress={() => {
-          //   props.navigation.navigate("Product Detail", { item: item });
-          // }}
         />
       ) : (
         <View style={StyleSheet.center}>
