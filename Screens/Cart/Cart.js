@@ -23,19 +23,20 @@ var { height, width } = Dimensions.get("window");
 
 const Cart = (props) => {
   var total = 0;
+  props.cartItems.forEach((cart) => {
+    return (total += cart.product.price);
+  });
 
   return (
     <NativeBaseProvider>
       {props.cartItems.length > 0 ? (
-        <Center borderWidth={1} height={height - 160}>
+        <Center style={styles.container}>
           <Heading style={{ alignSelf: "center" }}>Carrito</Heading>
           <FlatList
-            borderWidth={1}
             width={width}
             data={props.cartItems}
             renderItem={({ item }) => (
               <Box
-                borderBottomWidth="1"
                 _dark={{
                   borderColor: "gray.600",
                 }}
@@ -89,19 +90,19 @@ const Cart = (props) => {
             )}
             keyExtractor={(item) => item.product._id.$oid}
           />
-          <View style={styles.bottomContainer}>
-            <HStack space={3}>
-              <Text style={styles.price}>S/. {total}</Text>
+          <Box style={styles.bottomContainer}>
+            <HStack space={3} width={width}>
+              <Text style={styles.price}>Total: S/. {total}</Text>
               <Spacer />
-              <Button title="Limpiar" alignSelf="flex-start" />
+              <Button title="Limpiar" color="#009688" alignSelf="flex-start" />
               <Button
                 title="Comprar"
-                style={styles.button}
+                color="#009688"
                 alignSelf="flex-start"
                 onPress={() => props.navigation.navigate("Checkout")}
               />
             </HStack>
-          </View>
+          </Box>
         </Center>
       ) : (
         <Box alignSelf="center" style={styles.emptyContainer}>
@@ -128,24 +129,23 @@ const styles = StyleSheet.create({
     alignContent: "center",
     justifyContent: "center",
   },
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   bottomContainer: {
     flexDirection: "row",
     position: "absolute",
     bottom: 0,
     left: 0,
     backgroundColor: "white",
+    width: width,
+    justifyContent: "flex-end",
   },
   price: {
     fontSize: 18,
-    margin: 20,
+    margin: 10,
     color: "red",
-  },
-  button: {
-    elevation: 8,
-    backgroundColor: "#009688",
-    borderRadius: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 12,
   },
 });
 
