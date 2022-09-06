@@ -14,10 +14,14 @@ import {
   Heading,
   FlatList,
 } from "native-base";
+import { SwipeListView } from "react-native-swipe-list-view";
+import CartItem from "./CartItem";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/cartActions";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 var { height, width } = Dimensions.get("window");
 
@@ -27,74 +31,47 @@ const Cart = (props) => {
     return (total += cart.product.price);
   });
 
+  console.log(props);
+
   return (
     <NativeBaseProvider>
       {props.cartItems.length > 0 ? (
         <Center style={styles.container}>
           <Heading style={{ alignSelf: "center" }}>Carrito</Heading>
-          <FlatList
-            width={width}
+          <SwipeListView
             data={props.cartItems}
-            renderItem={({ item }) => (
-              <Box
-                _dark={{
-                  borderColor: "gray.600",
-                }}
-                borderColor="coolGray.200"
-                pl="4"
-                pr="5"
-                py="2"
-              >
-                <HStack space={3}>
-                  <Avatar
-                    size="48px"
-                    source={{
-                      uri: item.product.image
-                        ? item.product.image
-                        : "https://cdn.pixabay.com/photo/2012/04/01/17/29/box-23649_960_720.png",
-                    }}
-                  />
-                  <VStack>
-                    <Text
-                      _dark={{
-                        color: "warmGray.50",
-                      }}
-                      color="coolGray.800"
-                      bold
-                    >
-                      {item.product.name}
-                    </Text>
-                    <Text
-                      color="coolGray.600"
-                      maxWidth={width * 0.8}
-                      _dark={{
-                        color: "warmGray.200",
-                      }}
-                    >
-                      {item.product.description}
-                    </Text>
-                  </VStack>
-                  <Spacer />
-                  <Text
-                    fontSize="xs"
-                    _dark={{
-                      color: "warmGray.50",
-                    }}
-                    color="coolGray.800"
-                    alignSelf="flex-start"
-                  >
-                    S/. {item.product.price}
-                  </Text>
-                </HStack>
-              </Box>
+            renderItem={(data, rowMap) => {
+              <Cart item={data} />;
+            }}
+            renderHiddenItem={(data) => (
+              <View style={styles.hiddenContainer}>
+                <TouchableOpacity
+                  style={styles.hiddenButton}
+                  onPress={() => props.removeFromCart(data.item)}
+                >
+                  <Icon name="trash" color={"white"} size={30} />
+                </TouchableOpacity>
+              </View>
             )}
-            keyExtractor={(item) => item.product._id.$oid}
+            disableRightSwipe={true}
+            previewOpenDelay={3000}
+            friction={1000}
+            tension={40}
+            leftOpenValue={75}
+            stopLeftSwipe={75}
+            rightOpenValue={-75}
+            height={height}
           />
           <Box style={styles.bottomContainer}>
             <HStack space={3} width={width}>
               <Text style={styles.price}>Total: S/. {total}</Text>
               <Spacer />
-              <Button title="Limpiar" color="#009688" alignSelf="flex-start" />
+              <Button
+                title="Limpiar"
+                color="#009688"
+                alignSelf="flex-start"
+                onPress={() => props.clearCart()}
+              />
               <Button
                 title="Comprar"
                 color="#009688"
@@ -123,6 +100,13 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    clearCart: () => dispatch(actions.clearCart()),
+    removeFromCart: () => dispatch(actions.removeFromCart(item)),
+  };
+};
+
 const styles = StyleSheet.create({
   emptyContainer: {
     height: height / 2,
@@ -147,6 +131,19 @@ const styles = StyleSheet.create({
     margin: 10,
     color: "red",
   },
+  hiddenContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    flexDirection: "row",
+  },
+  hiddenButton: {
+    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "flex-end",
+    paddingRight: 25,
+    height: 70,
+    width: width / 0.2,
+  },
 });
 
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
