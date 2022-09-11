@@ -13,14 +13,18 @@ import {
 var { height, width } = Dimensions.get("window");
 
 const CartItem = (props) => {
-  //   const data = props.item.product;
-  //   const { quantity, setQuantity } = useState(props.item.quantity);
-
+  const { cartItems } = props.item;
+  // const { quantity, setQuantity } = useState(props.item.quantity);
+  console.log(cartItems);
   return (
-    <Text>HOla mundo</Text>
+    <Box>
+      {props.map((item) => {
+        return <Text>HOla mundo</Text>;
+      })}
+    </Box>
     // <FlatList
     //   width={width}
-    //   data={props.cartItems}
+    //   data={cartItems}
     //   renderItem={({ item }) => (
     //     <Box
     //       _dark={{
