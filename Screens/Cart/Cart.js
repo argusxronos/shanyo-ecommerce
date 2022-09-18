@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Dimensions, StyleSheet, Button } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
 import {
   NativeBaseProvider,
   Box,
@@ -13,6 +13,7 @@ import {
   Heading,
   Pressable,
   ScrollView,
+  Button,
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
@@ -106,7 +107,7 @@ const Cart = (props) => {
       >
         <VStack alignItems="center" space={2}>
           <Icon name="ellipsis-h" size="xs" color="coolGray.800" />
-          <Text fontSize="xs" fontWeight="medium" color="coolGray.800">
+          <Text size={"xs"} fontWeight="medium" color="coolGray.800">
             More
           </Text>
         </VStack>
@@ -123,7 +124,7 @@ const Cart = (props) => {
       >
         <VStack alignItems="center" space={2}>
           <Icon name="trash" color={"white"} size="xs" />
-          <Text color="white" fontSize="xs" fontWeight="medium">
+          <Text color="white" size={"xs"} fontWeight="medium">
             Delete
           </Text>
         </VStack>
@@ -153,16 +154,22 @@ const Cart = (props) => {
               <Spacer />
               <Button
                 title="Limpiar"
-                color="#009688"
                 alignSelf="flex-start"
                 onPress={() => props.clearCart()}
-              />
+                variant="outline"
+                colorScheme="success"
+              >
+                <Text>Limpiar</Text>
+              </Button>
               <Button
+                variant="outline"
+                colorScheme="success"
                 title="Comprar"
-                color="#009688"
                 alignSelf="flex-start"
                 onPress={() => props.navigation.navigate("Checkout")}
-              />
+              >
+                <Text>Comprar</Text>
+              </Button>
             </HStack>
           </Box>
         </Center>

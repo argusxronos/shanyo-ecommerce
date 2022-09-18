@@ -13,6 +13,7 @@ import { Icon } from "react-native-vector-icons/FontAwesome";
 import FormContainer from "../../../Shared/Form/FormContainer";
 import Input from "../../../Shared/Form/Input";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { MAX_LENGTH_PHONE_NUMBER } from "../../../configStore";
 
 import { connect } from "react-redux";
 
@@ -26,12 +27,14 @@ const Checkout = (props) => {
   const [zip, setZip] = useState();
   const [country, setCountry] = useState();
   const [phone, setPhone] = useState();
+
   useEffect(() => {
     setOrderItems(props.cartItems);
     return () => {
       setOrderItems();
     };
   }, []);
+
   const checkOut = () => {
     let order = {
       city,
@@ -41,10 +44,13 @@ const Checkout = (props) => {
       phone,
       shippingAddress1: address,
       shippingAddress2: address2,
+      status: "3",
       zip,
     };
-    props.navigation.navidate("Payment", { order: order });
+
+    props.navigation.navigate("Payment", { order: order });
   };
+
   return (
     <NativeBaseProvider>
       <KeyboardAwareScrollView
@@ -57,8 +63,9 @@ const Checkout = (props) => {
             placeholder={"Phone"}
             name={"phone"}
             value={phone}
-            keyboardtype={"numeric"}
+            keyboardType={"numeric"}
             onChangeText={(text) => setPhone(text)}
+            maxLength={MAX_LENGTH_PHONE_NUMBER}
           />
           <Input
             placeholder={"Shipping Adrees 1"}
@@ -82,7 +89,7 @@ const Checkout = (props) => {
             placeholder={"Zip Code"}
             name={"zip"}
             value={zip}
-            keyboardtype={"numeric"}
+            keyboardType={"numeric"}
             onChangeText={(text) => setZip(text)}
           />
           <Select
@@ -105,20 +112,15 @@ const Checkout = (props) => {
               />
             ))}
           </Select>
-          <View
-            borderWidth={1}
-            style={{ width: "80%", alignItems: "center", marginTop: 20 }}
-          >
+          <View style={{ width: "80%", alignItems: "center", marginTop: 20 }}>
             <Button
-              iconLeft
-              dark
-              width={"100%"}
-              height={50}
+              variant="outline"
+              colorScheme="success"
+              width={"90%"}
               title="Confirm"
               color={"white"}
               onPress={() => checkOut()}
             >
-              {/* <Icon name="cog" /> */}
               <Text>Confirm</Text>
             </Button>
           </View>
