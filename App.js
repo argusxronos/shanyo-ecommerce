@@ -12,7 +12,7 @@ import Main from "./Navigators/Main";
 
 // Screens
 import Header from "./Shared/Header";
-import ProductContainer from "./Screens/Products/ProductContainer";
+import ProductContainer from "./Screens/ProductsScreens/ProductContainer";
 
 LogBox.ignoreAllLogs(true);
 

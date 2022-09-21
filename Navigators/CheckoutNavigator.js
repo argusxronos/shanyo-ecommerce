@@ -2,9 +2,9 @@ import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // Payment Screens
-import Checkout from "../Screens/Cart/Checkout/Checkout";
-import Payment from "../Screens/Cart/Checkout/Payment";
-import Confirm from "../Screens/Cart/Checkout/Confirm";
+import Checkout from "../Screens/CartScreens/Checkout/Checkout";
+import Payment from "../Screens/CartScreens/Checkout/Payment";
+import Confirm from "../Screens/CartScreens/Checkout/Confirm";
 
 const Tab = createMaterialTopTabNavigator();
 
