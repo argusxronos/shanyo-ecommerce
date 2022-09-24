@@ -50,7 +50,7 @@ const Login = (props) => {
         <Text style={styles.middleText}>No tienes una cuenta aún?</Text>
         <Button
           title="Register"
-          onPress={() => props.navigator.navigate("Register")}
+          onPress={() => props.navigation.navigate("Register")}
         />
       </View>
     </FormContainer>
