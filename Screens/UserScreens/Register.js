@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import Toast from "react-native-toast-message";
-import { MAX_LENGTH_PHONE_NUMBER } from "../../../configStore";
+import { MAX_LENGTH_PHONE_NUMBER } from "../../configStore";
 
 const Register = (props) => {
   const [email, setEmail] = useState("");
@@ -75,7 +75,7 @@ const Register = (props) => {
           name={"phone"}
           id={"phone"}
           onChangeText={(text) => setPhone(text)}
-          maxLength={MAX_LENGTH_PHONE_NUMBER}
+          // maxLength={MAX_LENGTH_PHONE_NUMBER}
           keyboardType={"numeric"}
         />
         <Input
@@ -109,4 +109,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
 export default Register;

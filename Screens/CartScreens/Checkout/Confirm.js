@@ -64,7 +64,7 @@ const Confirm = (props) => {
                     </Text>
                     <Spacer />
                     <Text
-                      fontSize="xs"
+                      fontSize="14"
                       _dark={{
                         color: "warmGray.50",
                       }}

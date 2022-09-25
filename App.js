@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import { Toast } from "react-native-toast-message";
+import Toast from "react-native-toast-message";
 
 // Redux
 import { Provider } from "react-redux";
@@ -23,7 +23,7 @@ export default function App() {
       <NavigationContainer>
         <Header />
         <Main />
-        <Toast ref={{ref} => Toast.setRef(ref)} />
+        <Toast />
       </NavigationContainer>
     </Provider>
   );
