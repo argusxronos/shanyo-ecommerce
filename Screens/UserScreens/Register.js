@@ -68,7 +68,7 @@ const Register = (props) => {
           placeholder={"Name"}
           name={"name"}
           id={"name"}
-          onChangeText={(text) => setName(text.toLowerCase())}
+          onChangeText={(text) => setName(text)}
         />
         <Input
           placeholder={"Phone"}

@@ -7,6 +7,7 @@ import {
   ScrollView,
   Button,
 } from "react-native";
+import Toast from "react-native-toast-message";
 import { HStack, Center, NativeBaseProvider, Heading } from "native-base";
 
 import { connect } from "react-redux";
@@ -63,9 +64,15 @@ const SingleProduct = (props) => {
           >
             <Button
               style={styles.buttonAdd}
-              title="Agregar"
+              title="Add"
               onPress={() => {
-                props.addItemToCart(item);
+                props.addItemToCart(item),
+                  Toast.show({
+                    topOffset: 60,
+                    type: "success",
+                    text1: `${item.name} added to Cart`,
+                    text2: "Go to your cart to complete order.",
+                  });
               }}
             />
           </Center>
