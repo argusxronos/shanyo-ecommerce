@@ -6,7 +6,8 @@ import baseURL from "../../assets/common/baseUrl";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 export const loginUser = (user, dispatch) => {
-  console.log(JSON.stringify(user));
+  console.log(JSON.stringify(user)); // ???
+
   fetch(`${baseURL}users/login`, {
     method: "POST",
     body: JSON.stringify(user),
@@ -16,9 +17,9 @@ export const loginUser = (user, dispatch) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => {
-      if (data) {
-        const token = data.token;
+    .then((item) => {
+      if (item) {
+        const token = item.data.token;
         AsyncStorage.setItem("jwt", token);
         const decoded = jwt_decode(token);
         dispatch(setCurrentUser(decoded, user));
@@ -29,10 +30,11 @@ export const loginUser = (user, dispatch) => {
     .catch((error) => {
       Toast.show({
         topOffset: 60,
-        type: "success",
+        type: "error",
         text1: `Please provide correct credentials`,
       });
       logoutUser(dispatch);
+      console.log(error);
     });
 };
 
