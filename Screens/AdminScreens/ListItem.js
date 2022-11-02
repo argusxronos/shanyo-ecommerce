@@ -11,11 +11,12 @@ import {
   Modal,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
 var { width } = Dimensions.get("window");
 
 const ListItem = (props) => {
-  const [modalVisible, setModalVisible] = useState();
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <View>
@@ -45,14 +46,18 @@ const ListItem = (props) => {
                 <Icon name="close" size={20} />
               </View>
             </TouchableOpacity>
-            <Button
-              title="Edit"
+            <EasyButton
+              medium
+              secondary
               onPress={() => [
-                props.navigation.navigate("ProductForm"),
-                setModalVisible(false),
+                props.navigation.navigate("ProductForm", { item: props }),
               ]}
-            ></Button>
-            <Button title="Delete">Delete</Button>
+            >
+              <Text styles={styles.textStyle}>Edit</Text>
+            </EasyButton>
+            <EasyButton medium danger>
+              <Text styles={styles.textStyle}>Delete</Text>
+            </EasyButton>
           </View>
         </View>
       </Modal>
@@ -127,6 +132,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

@@ -8,6 +8,7 @@ import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import Toast from "react-native-toast-message";
 import { MAX_LENGTH_PHONE_NUMBER } from "../../configStore";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
 const Register = (props) => {
   const [email, setEmail] = useState("");
@@ -89,13 +90,18 @@ const Register = (props) => {
           {error ? <Error message={error} /> : null}
         </View>
         <View>
-          <Button title="Register" onPress={() => register()} />
+          <EasyButton primary large onPress={() => register()}>
+            <Text style={{ color: "white" }}>Register</Text>
+          </EasyButton>
         </View>
         <View>
-          <Button
-            title="Back to Login"
+          <EasyButton
+            large
+            secondary
             onPress={() => props.navigation.navigate("Login")}
-          />
+          >
+            <Text style={{ color: "white" }}>Back to Login</Text>
+          </EasyButton>
         </View>
       </FormContainer>
     </KeyboardAwareScrollView>

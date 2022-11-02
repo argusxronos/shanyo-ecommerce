@@ -17,6 +17,7 @@ import {
 } from "native-base";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { MaterialIcons, Ionicons, Entypo } from "@expo/vector-icons";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -152,24 +153,16 @@ const Cart = (props) => {
             <HStack space={3} width={width}>
               <Text style={styles.price}>Total: S/. {total}</Text>
               <Spacer />
-              <Button
-                title="Limpiar"
-                alignSelf="flex-start"
-                onPress={() => props.clearCart()}
-                variant="outline"
-                colorScheme="success"
-              >
-                <Text>Limpiar</Text>
-              </Button>
-              <Button
-                variant="outline"
-                colorScheme="success"
-                title="Comprar"
-                alignSelf="flex-start"
+              <EasyButton danger midium onPress={() => props.clearCart()}>
+                <Text style={{ color: "white" }}>Limpiar</Text>
+              </EasyButton>
+              <EasyButton
+                midium
+                primary
                 onPress={() => props.navigation.navigate("Checkout")}
               >
-                <Text>Comprar</Text>
-              </Button>
+                <Text style={{ color: "white" }}>Comprar</Text>
+              </EasyButton>
             </HStack>
           </Box>
         </Center>
