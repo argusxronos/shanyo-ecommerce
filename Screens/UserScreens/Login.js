@@ -29,7 +29,7 @@ const Login = (props) => {
 
     if (email === "" || password === "") {
       setError("Por favor, ingrese sus credenciales correctamente.");
-      console.log("Login user failure.");
+      console.log("Empty credentials!");
     } else {
       setError("");
       loginUser(user, context.dispatch);

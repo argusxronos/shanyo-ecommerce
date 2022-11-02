@@ -135,7 +135,7 @@ const ProductContainer = (props) => {
             >
               <VStack w="100%" space={5} alignSelf="center">
                 <Input
-                  laceholder="Search People & Places"
+                  placeholder="Search Product"
                   width="100%"
                   borderRadius="4"
                   py="3"

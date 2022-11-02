@@ -6,7 +6,7 @@ import baseURL from "../../assets/common/baseUrl";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
 export const loginUser = (user, dispatch) => {
-  console.log(JSON.stringify(user)); // ???
+  console.log("Logging in the user " + JSON.stringify(user));
 
   fetch(`${baseURL}users/login`, {
     method: "POST",

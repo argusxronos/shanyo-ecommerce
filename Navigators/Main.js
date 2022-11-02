@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NativeBaseProvider, VStack } from "native-base";
 import { View } from "react-native";
@@ -9,10 +9,15 @@ import HomeNavigator from "./HomeNavigator";
 import CartNavigator from "./CartNavigator";
 import CartIcon from "../Shared/cartIcon";
 import UserNavigator from "./UserNavigator";
+import AdminNavigator from "./AdminNavigator";
+
+import AuthGlobal from "../Context/store/AuthGlobal";
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+  const context = useContext(AuthGlobal);
+
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -65,9 +70,10 @@ const Main = () => {
           ),
         }}
       />
+      {/* {context.stateUser.user.isAdmin === true ? ( */}
       <Tab.Screen
         name="Admin"
-        component={HomeNavigator}
+        component={AdminNavigator}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon
@@ -79,6 +85,7 @@ const Main = () => {
           ),
         }}
       />
+      {/* ) : null} */}
       <Tab.Screen
         name="User"
         component={UserNavigator}
