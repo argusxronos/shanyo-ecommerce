@@ -10,13 +10,33 @@ import {
 import Toast from "react-native-toast-message";
 import { HStack, Center, NativeBaseProvider, Heading } from "native-base";
 import EasyButton from "../../Shared/StyledComponents/EasyButton";
+import TrafficLight from "../../Shared/StyledComponents/TrafficLight";
 
 import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/cartActions";
 
 const SingleProduct = (props) => {
   const [item, setItem] = useState(props.route.params.item);
-  const [availability, setAvailability] = useState("");
+  const [availability, setAvailability] = useState(null);
+  const [availabilityText, setAvailabilityText] = useState("");
+
+  useEffect(() => {
+    if (props.route.params.item.countInStock == 0) {
+      setAvailability(<TrafficLight unavailable></TrafficLight>);
+      setAvailabilityText("Unavailable");
+    } else if (props.route.params.item.countInStock <= 5) {
+      setAvailability(<TrafficLight limited></TrafficLight>);
+      setAvailabilityText("Limited Stock");
+    } else {
+      setAvailability(<TrafficLight available></TrafficLight>);
+      setAvailabilityText("Available");
+    }
+
+    return () => {
+      setAvailability(null);
+      setAvailabilityText("");
+    };
+  }, []);
 
   return (
     <NativeBaseProvider>
@@ -36,7 +56,15 @@ const SingleProduct = (props) => {
           <Heading style={styles.contentHeader}>{item.name}</Heading>
           <Text style={styles.contentText}>{item.brand}</Text>
         </View>
-        {/* TODO: Descripction, Rich Descrciption and Availability */}
+        <View style={styles.availabilityContainer}>
+          <View style={styles.availability}>
+            <Text style={{ marginRight: 10 }}>
+              Availability: {availabilityText}
+            </Text>
+            {availability}
+          </View>
+          <Text>{item.description}</Text>
+        </View>
       </ScrollView>
 
       <View style={styles.bottomContainer}>
@@ -134,6 +162,14 @@ const styles = StyleSheet.create({
   },
   buttonAdd: {
     color: "white",
+  },
+  availabilityContainer: {
+    marginBottom: 20,
+    alignItems: "center",
+  },
+  availability: {
+    flexDirection: "row",
+    marginBottom: 10,
   },
 });
 

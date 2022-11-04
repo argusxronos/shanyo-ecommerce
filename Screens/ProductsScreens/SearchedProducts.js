@@ -71,7 +71,7 @@ const SearchedProduct = (props) => {
                   </VStack>
                   <Spacer />
                   <Text
-                    fontSize="xs"
+                    fontSize="4xl"
                     _dark={{
                       color: "warmGray.50",
                     }}
