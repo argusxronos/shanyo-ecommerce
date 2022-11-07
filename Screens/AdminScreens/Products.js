@@ -22,6 +22,7 @@ import ListItem from "./ListItem";
 import axios from "axios";
 import baseURL from "../../assets/common/baseUrl";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 
 var { height, width } = Dimensions.get("window");
 
@@ -100,36 +101,61 @@ const Products = (props) => {
 
   return (
     <NativeBaseProvider>
-      <View>
-        <Searchbar
-          onChangeText={(text) => searchProduct(text)}
-          searchProduct={searchProduct}
-          setSearchText={setSearchText}
-          searchText={searchText}
-        />
-      </View>
-
-      {loading ? (
-        <View style={styles.spinner}>
-          <ActivityIndicator size={"large"} color="red" />
+      <View style={styles.container}>
+        <View style={styles.buttomContainer}>
+          <EasyButton
+            secondary
+            medium
+            onPress={() => props.navigation.navigate("Orders")}
+          >
+            <Text style={{ color: "white", marginLeft: 4 }}>Orders</Text>
+          </EasyButton>
+          <EasyButton
+            secondary
+            medium
+            onPress={() => props.navigation.navigate("ProductsForm")}
+          >
+            <Text style={{ color: "white", marginLeft: 4 }}>Products</Text>
+          </EasyButton>
+          <EasyButton
+            secondary
+            medium
+            onPress={() => props.navigation.navigate("Categories")}
+          >
+            <Text style={{ color: "white", marginLeft: 4 }}>Categories</Text>
+          </EasyButton>
         </View>
-      ) : (
-        <FlatList
-          data={productFilter}
-          ListHeaderComponent={ListHeader}
-          renderItem={({ item, index }) => {
-            return (
-              <ListItem
-                {...item}
-                navigation={props.navigation}
-                index={index}
-                delete={deleteProduct}
-              />
-            );
-          }}
-          keyExtractor={(item) => item.id}
-        />
-      )}
+        <View>
+          <Searchbar
+            onChangeText={(text) => searchProduct(text)}
+            searchProduct={searchProduct}
+            setSearchText={setSearchText}
+            searchText={searchText}
+          />
+        </View>
+
+        {loading ? (
+          <View style={styles.spinner}>
+            <ActivityIndicator size={"large"} color="red" />
+          </View>
+        ) : (
+          <FlatList
+            data={productFilter}
+            ListHeaderComponent={ListHeader}
+            renderItem={({ item, index }) => {
+              return (
+                <ListItem
+                  {...item}
+                  navigation={props.navigation}
+                  index={index}
+                  delete={deleteProduct}
+                />
+              );
+            }}
+            keyExtractor={(item) => item.id}
+          />
+        )}
+      </View>
     </NativeBaseProvider>
   );
 };
@@ -151,6 +177,19 @@ const styles = StyleSheet.create({
     height: height / 2,
     alignItems: "center",
     justifyContent: "center",
+  },
+  container: {
+    marginBottom: 160,
+    backgroundColor: "white",
+  },
+  buttomContainer: {
+    margin: 20,
+    alignSelf: "center",
+    flexDirection: "row",
+  },
+  buttomText: {
+    marginLeft: 4,
+    color: "white",
   },
 });
 

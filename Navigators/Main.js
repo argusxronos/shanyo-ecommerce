@@ -70,22 +70,22 @@ const Main = () => {
           ),
         }}
       />
-      {context.stateUser.user.isAdmin === true ? (
-        <Tab.Screen
-          name="Admin"
-          component={AdminNavigator}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon
-                name="cog"
-                style={{ position: "relative" }}
-                color={color}
-                size={30}
-              />
-            ),
-          }}
-        />
-      ) : null}
+      {/* {context.stateUser.user.isAdmin === true ? ( */}
+      <Tab.Screen
+        name="Admin"
+        component={AdminNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Icon
+              name="cog"
+              style={{ position: "relative" }}
+              color={color}
+              size={30}
+            />
+          ),
+        }}
+      />
+      {/* ) : null} */}
       <Tab.Screen
         name="User"
         component={UserNavigator}
