@@ -113,7 +113,7 @@ const Products = (props) => {
           <EasyButton
             secondary
             medium
-            onPress={() => props.navigation.navigate("ProductsForm")}
+            onPress={() => props.navigation.navigate("ProductForm")}
           >
             <Text style={{ color: "white", marginLeft: 4 }}>Products</Text>
           </EasyButton>
