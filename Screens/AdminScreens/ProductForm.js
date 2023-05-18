@@ -71,7 +71,7 @@ const ProductForm = (props) => {
 
     console.log(result);
 
-    if (!(result.cancelled || result.cancelled == "undefined")) {
+    if (!(result.canceled || result.canceled == "undefined")) {
       setMainImage(result.uri);
       setImage(result.uri);
     }
