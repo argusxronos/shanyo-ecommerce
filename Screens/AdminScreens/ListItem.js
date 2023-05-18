@@ -65,6 +65,7 @@ const ListItem = (props) => {
           </View>
         </View>
       </Modal>
+
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate("Product Detail"), { item: props };

@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-let baseURL = "https://shanyostore-backend.herokuapp.com/api/v1/";
+let baseURL = "https://web-production-8406.up.railway.app/api/v1/";
 // let baseURL = "";
 
 // {

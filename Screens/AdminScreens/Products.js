@@ -88,6 +88,7 @@ const Products = (props) => {
   };
 
   const deleteProduct = (id) => {
+    console.log("Start DeleteProduct method.");
     axios
       .delete(`${baseURL}products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
